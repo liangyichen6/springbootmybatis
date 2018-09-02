@@ -139,7 +139,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectCustomersByName" parameterType="java.lang.String" resultType="ivan.learn.springboot.mybatis.model.Customer">
-    select * from t_customer where name = ${name}
+  <select id="selectCustomerByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from t_customer where name = #{name}
   </select>
 </mapper>

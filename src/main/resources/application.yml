@@ -1,0 +1,18 @@
+spring:
+    application:
+        name: springboot-mybatis
+    datasource:
+        username: root
+        password: admin
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/learn-mybatis
+
+logging:
+    level:
+        ivan.learn.springboot.mybatis.dao: debug
+
+
+mybatis:
+    mapperLocations: classpath:/mappings/*.xml
+    configuration:
+        logImpl: org.apache.ibatis.logging.log4j.Log4jImpl #mybatis log implements
