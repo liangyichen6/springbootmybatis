@@ -24,8 +24,22 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
+
+
+    <build>
+        <plugins>
+            <!--Maven Mybatis generator plugin-->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.7</version>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+
 
 </project>
