@@ -5,16 +5,15 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import sun.misc.Request;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLEncoder;
 
 @RestController
@@ -58,24 +57,4 @@ public class CustomerController {
         return null;
     }
 
-
-    /**
-     * @return String
-     * @Title: getBrowser
-     * @Description: 判断客户端浏览器
-     * @author
-     * @date
-     */
-    private static String getBrowser(HttpServletRequest request) {
-        String UserAgent = request.getHeader("USER-AGENT").toLowerCase();
-        if (UserAgent != null) {
-            if (UserAgent.indexOf("msie") != -1)
-                return "IE";
-            if (UserAgent.indexOf("firefox") != -1)
-                return "FF";
-            if (UserAgent.indexOf("safari") != -1)
-                return "SF";
-        }
-        return null;
-    }
 }
