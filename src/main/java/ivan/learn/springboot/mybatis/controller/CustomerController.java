@@ -1,6 +1,7 @@
 package ivan.learn.springboot.mybatis.controller;
 
 import ivan.learn.springboot.mybatis.service.CustomerService;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import javax.xml.ws.Response;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLEncoder;
 
 @RestController
@@ -34,37 +36,20 @@ public class CustomerController {
     public ResponseEntity downloadFile(HttpServletRequest request, HttpServletResponse response) {
         try {
 
-            ClassPathResource resource = new ClassPathResource("shell脚本学习手册.docx");
+            ClassPathResource resource = new ClassPathResource("新建 Microsoft Word 文档.docx");
 
 
             String filename = resource.getFilename();
+            filename = "2.docx";
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/octet-stream");
-            // 设置response的Header
-            String realName = filename;
-            //判断浏览器是否为火狐
-            if ("FF".equals(getBrowser(request))) {
-                // 火狐浏览器 设置编码new String(realName.getBytes("GB2312"), "ISO-8859-1");
-                realName = new String(filename.getBytes("GB2312"), "ISO-8859-1");
-            } else {
-                realName = URLEncoder.encode(realName, "UTF-8");//encode编码UTF-8 解决大多数中文乱码
-                realName = realName.replace("+", "%20");//encode后替换空格  解决空格问题
-            }
-
-            response.addHeader("Content-Disposition", "attachment; filename=\"" + realName + "\"");
+            response.addHeader("Content-Disposition","attachment; filename=UTF-8''"+ URLEncoder.encode(filename,"UTF-8"));
 
             OutputStream out = response.getOutputStream();
             InputStream inputStream = resource.getInputStream();
+            IOUtils.copy(inputStream,out);
 
-            byte[] buf = new byte[1024];
-
-            int len;
-
-            while (!((len=inputStream.read(buf)) == -1)) {
-                out.write(buf,0,len);
-            }
-
-            out.close();
+            out.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }
