@@ -25,36 +25,8 @@ public class CustomerController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity getCustomers(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
+    public ResponseEntity listCustomers(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
 
-        return ResponseEntity.ok(customerService.getCustomers(pageNum, pageSize));
+        return ResponseEntity.ok(customerService.listCustomers(pageNum, pageSize));
     }
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/download")
-    public ResponseEntity downloadFile(HttpServletRequest request, HttpServletResponse response) {
-        try {
-
-            ClassPathResource resource = new ClassPathResource("新建 Microsoft Word 文档.docx");
-
-
-            String filename = resource.getFilename();
-            filename = "2.docx";
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("application/octet-stream");
-            response.addHeader("Content-Disposition","attachment; filename=UTF-8''"+ URLEncoder.encode(filename,"UTF-8"));
-
-            OutputStream out = response.getOutputStream();
-            InputStream inputStream = resource.getInputStream();
-            IOUtils.copy(inputStream,out);
-
-            out.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        return null;
-    }
-
 }

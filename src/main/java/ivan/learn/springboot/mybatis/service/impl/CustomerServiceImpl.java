@@ -28,15 +28,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public PageInfo<Customer> getCustomers(Integer pageNum, Integer pageSize) {
+    public PageInfo<Customer> listCustomers(Integer pageNum, Integer pageSize) {
 
         PageHelper.startPage(pageNum,pageSize);
-
         List<Customer> result = customerMapper.selectCustomers();
-
-
         return new PageInfo<Customer>(result);
-
-
     }
 }

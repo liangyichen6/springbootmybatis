@@ -10,5 +10,5 @@ public interface CustomerService {
 
     Customer getCustomerByName(String name);
 
-    PageInfo<Customer> getCustomers(Integer pageNum, Integer pageSize);
+    PageInfo<Customer> listCustomers(Integer pageNum, Integer pageSize);
 }
